@@ -1,5 +1,5 @@
 import React from "react";
-import ClickUpGantt from "./PsfFlox/Psf";
+import ClickUpGantt from "./Psf/Psf";
 
 function App() {
   return (

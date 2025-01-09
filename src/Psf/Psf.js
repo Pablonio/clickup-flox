@@ -1,12 +1,15 @@
+// ProjectGantt.jsx
 import React, { useState } from "react";
 import styles from "./styles/estilos.module.css";
 import { sprints } from "../utils/sprints";
+import { verificarAcceso } from "../utils/auth";
+import Login from "../InicioSesion/InicioSesion";
 
 const ProjectGantt = () => {
   const [taskDetails, setTaskDetails] = useState(null);
   const [expandedTask, setExpandedTask] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // Función para obtener el rango de fechas del proyecto
   const getProjectDateRange = () => {
     const startDates = sprints.map(task => new Date(task.start));
     const endDates = sprints.map(task => new Date(task.end));
@@ -24,6 +27,20 @@ const ProjectGantt = () => {
     return dates;
   };
 
+  const handleLogin = (userData) => {
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setTaskDetails(null);
+    setExpandedTask(null);
+  };
+
+  if (!user) {
+    return <Login onLogin={handleLogin} />;
+  }
+
   const dateRange = getProjectDateRange();
   const projectStartDate = dateRange[0];
 
@@ -40,10 +57,15 @@ const ProjectGantt = () => {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h1 className={styles.title}>Proyecto Desarrollo de Herramientas IA</h1>
+          <div className={styles.userInfo}>
+            <span>Usuario: {user.nombre}</span>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
 
         <div className={styles.mainContent}>
-          {/* Panel izquierdo - Lista de tareas */}
           <div className={styles.taskList}>
             <div className={styles.taskListHeader}>
               <div className={styles.taskNumber}>#</div>
@@ -62,29 +84,30 @@ const ProjectGantt = () => {
                     <div className={styles.phaseName}>{phase}</div>
                   </div>
                   
-                  {expandedTask === phase && phaseTasks.map((task, index) => (
-                    <div
-                      key={index}
-                      className={styles.taskRow}
-                      onMouseEnter={() => setTaskDetails(task)}
-                      onMouseLeave={() => setTaskDetails(null)}
-                    >
-                      <div className={styles.taskIndex}>{index + 1}</div>
-                      <div className={styles.taskTitle}>{task.task}</div>
-                      <div className={styles.taskTime}>
-                        {Math.ceil((new Date(task.end) - new Date(task.start)) / (1000 * 60 * 60 * 24) + 1)} días
+                  {expandedTask === phase && phaseTasks.map((task, index) => {
+                    const hasAccess = verificarAcceso(user, task);
+                    return (
+                      <div
+                        key={index}
+                        className={`${styles.taskRow} ${!hasAccess ? styles.disabled : ''}`}
+                        onMouseEnter={() => hasAccess && setTaskDetails(task)}
+                        onMouseLeave={() => setTaskDetails(null)}
+                      >
+                        <div className={styles.taskIndex}>{index + 1}</div>
+                        <div className={styles.taskTitle}>{task.task}</div>
+                        <div className={styles.taskTime}>
+                          {Math.ceil((new Date(task.end) - new Date(task.start)) / (1000 * 60 * 60 * 24) + 1)} días
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Panel derecho - Timeline */}
           <div className={styles.timeline}>
             <div className={styles.timelineWrapper}>
-              {/* Header con fechas */}
               <div className={styles.timelineHeader}>
                 {dateRange.map((date, index) => (
                   <div key={index} className={styles.dateCell}>
@@ -94,7 +117,6 @@ const ProjectGantt = () => {
                 ))}
               </div>
 
-              {/* Contenido del timeline */}
               <div className={styles.timelineContent}>
                 {Object.entries(groupedTasks).map(([phase, phaseTasks]) => (
                   <div key={phase} className={styles.phaseRow}>
@@ -104,11 +126,12 @@ const ProjectGantt = () => {
                       const endDate = new Date(task.end);
                       const startOffset = ((startDate - projectStartDate) / (1000 * 60 * 60 * 24)) * 96;
                       const duration = ((endDate - startDate) / (1000 * 60 * 60 * 24) + 1) * 96;
+                      const hasAccess = verificarAcceso(user, task);
 
                       return (
                         <div key={taskIndex} className={styles.taskTimelineRow}>
                           <div
-                            className={styles.taskBar}
+                            className={`${styles.taskBar} ${!hasAccess ? styles.taskBarDisabled : ''}`}
                             style={{
                               left: `${startOffset}px`,
                               width: `${duration}px`,
@@ -124,16 +147,30 @@ const ProjectGantt = () => {
           </div>
         </div>
 
-        {/* Popup de detalles */}
-        {taskDetails && (
+        {taskDetails && verificarAcceso(user, taskDetails) && (
           <div className={styles.taskDetails}>
             <h3 className={styles.taskDetailsTitle}>{taskDetails.task}</h3>
-            <p className={styles.taskDetailsText}>Responsables: {taskDetails.responsable}</p>
-            <p className={styles.taskDetailsText}>
-              Inicio: {new Date(taskDetails.start).toLocaleDateString()}
-              <br />
-              Fin: {new Date(taskDetails.end).toLocaleDateString()}
-            </p>
+            <div className={styles.taskDetailsContent}>
+              <p className={styles.taskDetailsText}>
+                <strong>Responsables:</strong>
+                <span className={styles.responsablesList}>
+                  {taskDetails.responsable.split(', ').map((resp, idx) => (
+                    <span key={idx} className={styles.responsableTag}>
+                      {resp}
+                    </span>
+                  ))}
+                </span>
+              </p>
+              <p className={styles.taskDetailsText}>
+                <strong>Fase:</strong> {taskDetails.fase}
+              </p>
+              <p className={styles.taskDetailsText}>
+                <strong>Inicio:</strong> {new Date(taskDetails.start).toLocaleDateString()}
+              </p>
+              <p className={styles.taskDetailsText}>
+                <strong>Fin:</strong> {new Date(taskDetails.end).toLocaleDateString()}
+              </p>
+            </div>
           </div>
         )}
       </div>

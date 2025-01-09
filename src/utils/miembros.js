@@ -1,3 +1,1 @@
-export const miembros = [
-    "Pablo, Dayer, Gabriela","Victor","Andrés","Todos"
-]
+export const miembros = ["Pablo", "Dayer", "Gabriela", "Victor", "Andrés", "Todos"];
