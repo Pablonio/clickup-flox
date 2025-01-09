@@ -1,0 +1,203 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+  }
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .header {
+    padding: 1rem;
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+  }
+  
+  .mainContent {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  /* Lista de tareas */
+  .taskList {
+    width: 33.333%;
+    border-right: 1px solid #e5e7eb;
+    background-color: white;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .taskListHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    background-color: #f3f4f6;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 500;
+  }
+  
+  .taskNumber {
+    width: 2rem;
+  }
+  
+  .taskName {
+    flex: 1;
+  }
+  
+  .taskDuration {
+    width: 6rem;
+    text-align: right;
+  }
+  
+  .taskListContent {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  /* Grupos de fases */
+  .phaseGroup {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .phaseHeader {
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .phaseHeader:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .phaseName {
+    font-weight: 500;
+    margin-left: 0.5rem;
+  }
+  
+  /* Filas de tareas */
+  .taskRow {
+    display: flex;
+    padding: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+    cursor: pointer;
+  }
+  
+  .taskRow:hover {
+    background-color: #eff6ff;
+  }
+  
+  .taskIndex {
+    width: 2rem;
+    color: #6b7280;
+  }
+  
+  .taskTitle {
+    flex: 1;
+  }
+  
+  .taskTime {
+    width: 6rem;
+    text-align: right;
+    color: #6b7280;
+  }
+  
+  /* Timeline */
+  .timeline {
+    flex: 1;
+    overflow-x: auto;
+  }
+  
+  .timelineWrapper {
+    display: inline-block;
+    min-width: 100%;
+  }
+  
+  .timelineHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .dateCell {
+    width: 6rem;
+    padding: 0.5rem;
+    text-align: center;
+    border-right: 1px solid #e5e7eb;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timelineContent {
+    position: relative;
+  }
+  
+  /* Filas de fases en el timeline */
+  .phaseRow {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .phaseBackground {
+    height: 2rem;
+    background-color: #f8f9fa;
+  }
+  
+  .taskTimelineRow {
+    height: 2rem;
+    position: relative;
+  }
+  
+  /* Barras de tareas */
+  .taskBar {
+    position: absolute;
+    height: 1.5rem;
+    top: 0.25rem;
+    background-color: #3b82f6;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+  }
+  
+  .taskBar:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Detalles de tarea */
+  .taskDetails {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+  }
+  
+  .taskDetailsTitle {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .taskDetailsText {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
