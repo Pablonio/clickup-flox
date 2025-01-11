@@ -1,4 +1,3 @@
-// ProjectGantt.jsx
 import React, { useState } from "react";
 import styles from "./styles/estilos.module.css";
 import { sprints } from "../utils/sprints";
@@ -41,16 +40,21 @@ const ProjectGantt = () => {
     return <Login onLogin={handleLogin} />;
   }
 
-  const dateRange = getProjectDateRange();
-  const projectStartDate = dateRange[0];
+  // Obtener tareas filtradas por usuario o mostrar todas si el usuario seleccionó "Todos"
+  const filteredTasks = sprints.filter(task => 
+    user.nombre === "Todos" || task.responsable.includes(user.nombre)
+  );
 
-  const groupedTasks = sprints.reduce((acc, task) => {
+  const groupedTasks = filteredTasks.reduce((acc, task) => {
     if (!acc[task.fase]) {
       acc[task.fase] = [];
     }
     acc[task.fase].push(task);
     return acc;
   }, {});
+
+  const dateRange = getProjectDateRange();
+  const projectStartDate = dateRange[0];
 
   return (
     <div className={styles.container}>
