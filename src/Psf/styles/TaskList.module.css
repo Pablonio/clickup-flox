@@ -1,0 +1,74 @@
+.taskList {
+    flex: 0 0 300px;
+    border-right: 1px solid #e9ecef;
+  }
+  
+  .taskListHeader {
+    display: grid;
+    grid-template-columns: 40px 1fr 80px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: bold;
+  }
+  
+  .taskListContent {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+  
+  .phaseGroup {
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .phaseHeader {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .phaseHeader:hover {
+    background-color: #e9ecef;
+  }
+  
+  .phaseName {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-left: 8px;
+  }
+  
+  .taskRow {
+    display: grid;
+    grid-template-columns: 40px 1fr 80px;
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .taskRow:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .taskRow.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .taskIndex {
+    color: #6c757d;
+  }
+  
+  .taskTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .taskTime {
+    text-align: right;
+    color: #6c757d;
+  }

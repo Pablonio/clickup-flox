@@ -1,0 +1,60 @@
+.timeline {
+    flex: 1;
+    overflow-x: auto;
+  }
+  
+  .timelineWrapper {
+    min-width: 100%;
+  }
+  
+  .timelineHeader {
+    display: flex;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .dateCell {
+    flex: 0 0 96px;
+    padding: 8px;
+    text-align: center;
+    border-right: 1px solid #e9ecef;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .timelineContent {
+    position: relative;
+  }
+  
+  .phaseRow {
+    position: relative;
+    height: auto;
+  }
+  
+  .phaseBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f8f9fa;
+    opacity: 0.5;
+  }
+  
+  .taskTimelineRow {
+    height: 40px;
+    position: relative;
+  }
+  
+  .taskBar {
+    position: absolute;
+    height: 24px;
+    top: 8px;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  
+  .taskBarDisabled {
+    opacity: 0.5;
+  }

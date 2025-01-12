@@ -1,0 +1,71 @@
+/* components/TaskDetails/TaskDetails.module.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  
+  .taskDetailsModal {
+    position: absolute;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    min-width: 300px;
+    max-width: 400px;
+    pointer-events: auto;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .taskDetailsTitle {
+    margin: 0 0 16px 0;
+    color: #2c3e50;
+    font-size: 18px;
+  }
+  
+  .taskDetailsContent {
+    display: grid;
+    gap: 12px;
+  }
+  
+  .taskDetailsText {
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .taskDetailsText strong {
+    color: #2c3e50;
+    min-width: 100px;
+  }
+  
+  .responsablesList {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .responsableTag {
+    padding: 4px 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #2c3e50;
+  }

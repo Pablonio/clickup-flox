@@ -22,7 +22,7 @@ export const usuarios = {
         contra: "vagabundo",
     },
     user6: {
-        nombre: "Tarifa",
+        nombre: "Todos",
         contra: "12345678",
     },
 };

@@ -1,12 +1,8 @@
 import React from "react";
-import ClickUpGantt from "./Psf/Psf";
+import { PaginaInicio } from "./Psf";
 
 function App() {
-  return (
-    <div>
-      <ClickUpGantt />
-    </div>
-  );
+  return <PaginaInicio />;
 }
 
 export default App;
